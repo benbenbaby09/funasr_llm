@@ -2,7 +2,7 @@
 gradio
 loguru
 funasr
-faster_whisper
+#faster_whisper
 modelscope
 torchaudio
 openai
