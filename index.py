@@ -84,4 +84,4 @@ demo = gr.Interface(fn=greet,
     ],
     outputs=[gr.Textbox(label="面试者回答文本"),gr.Textbox(label="AI评估")])
 
-demo.launch()
+demo.launch(server_name='0.0.0.0')
