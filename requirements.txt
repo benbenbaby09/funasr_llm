@@ -1,4 +1,5 @@
 #chainlit
+gradio
 loguru
 funasr
 faster_whisper
