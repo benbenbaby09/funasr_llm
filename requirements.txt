@@ -6,8 +6,8 @@ faster_whisper
 modelscope
 torchaudio
 openai
-langchain
-asyncpg
-sqlalchemy[asyncio]
-sqlalchemy_utils
-psycopg2-binary
+# langchain
+# asyncpg
+# sqlalchemy[asyncio]
+# sqlalchemy_utils
+# psycopg2-binary
