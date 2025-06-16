@@ -80,7 +80,7 @@ demo = gr.Interface(fn=greet,
             gr.Audio(label="面试者回答",sources="microphone"),
             gr.Textbox(label="预期答案", value="Java 是一种 跨平台、面向对象 的编程语言，通过 JVM 虚拟机 实现 一次编写，到处运行."),
             gr.Textbox(label="AI角色", value="你是一名资深的软件技术专家面试官，你是java之父詹姆斯·高斯林,严格根据提供的正确答案与面试者的回答进行评估，按照要求给出评估结果.", placeholder="输入角色..."),
-            gr.Textbox(label="AI提示词", value="我向面试者提了一个问题:{question)；预期答案：{correct_answer}；面试者回答:{answer}；请帮我评估一下是否正确，给个评分，满分是100分(准确性占40分，如果错误则0分;创造性占30分;深度占30分，错别字不扣分)，请给出最终的得分，并判断是否及格(60分及格)", placeholder="输入提示词..."),
+            gr.Textbox(label="AI提示词", value="我向面试者提了一个问题:{question}；预期答案：{correct_answer}；面试者回答:{answer}；请帮我评估一下是否正确，给个评分，满分是100分(准确性占40分，如果错误则0分;创造性占30分;深度占30分，错别字不扣分)，请给出最终的得分，并判断是否及格(60分及格)", placeholder="输入提示词..."),
     ],
     outputs=[gr.Textbox(label="面试者回答文本"),gr.Textbox(label="AI评估")])
 
