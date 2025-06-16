@@ -8,6 +8,7 @@ from openai import OpenAI
 
 from datetime import datetime
 
+#保存音频文件
 def save_audio(audio):
     # 获取音频数据（采样率, 音频数组）
     sr, audio_data = audio
@@ -80,7 +81,7 @@ def greet(question, audio_input, correct_answer, role, tips: str, ):
     audio_bytes = process_audio(audio_input)
     # 调用模型进行处理
     audio_ouput = transcribe(audio_bytes)
-    # audio_ouput="Java是吃的"
+
     logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
     messages = [
         {"role": "system", "content": role},
@@ -104,5 +105,5 @@ demo = gr.Interface(fn=greet,
     ],
     outputs=[gr.Textbox(label="面试者回答文本"),gr.Textbox(label="AI评估")])
 
-#demo.launch(server_name='0.0.0.0',server_port=443,ssl_certfile="./../keys/ai.suanputao.com.pem", ssl_keyfile="./../keys/ai.suanputao.com.key", ssl_verify=False)
+#demo.launch(server_name='0.0.0.0',server_port=443,ssl_certfile="./../keys/ai.**.com.pem", ssl_keyfile="./../keys/ai.**.com.key", ssl_verify=False)
 demo.launch(server_name='0.0.0.0')
