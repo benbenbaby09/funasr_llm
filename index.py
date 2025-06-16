@@ -6,6 +6,22 @@ from funasr import AutoModel
 from loguru import logger
 from openai import OpenAI
 
+from datetime import datetime
+
+def save_audio(audio):
+    # 获取音频数据（采样率, 音频数组）
+    sr, audio_data = audio
+
+    # 生成唯一文件名（时间戳 + .wav）
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = f"recorded_audio_{timestamp}.wav"
+
+    # 使用 scipy.io.wavfile 保存为 WAV 文件
+    from scipy.io import wavfile
+    wavfile.write(output_path, sr, audio_data)
+
+    return os.path.abspath(output_path)
+
 def chat_with_ollama(messages: list[dict], callback=None):
     base_url = os.getenv('OLLAMA_BASE_URL', 'http://localhost:11434/v1')
     model = os.getenv('OLLAMA_MODEL', 'qwen2:7b')
@@ -57,11 +73,14 @@ def transcribe(audio_file: bytes, output: str = "txt"):
 #输入文本处理程序
 def greet(question, audio_input, correct_answer, role, tips: str, ):
     # 保存音频文件并获取路径
+    file_path=save_audio(audio)
+
+    # 保存音频文件并获取路径
     audio_bytes = process_audio(audio_input)
     # 调用模型进行处理
     audio_ouput = transcribe(audio_bytes)
     # audio_ouput="Java是吃的"
-    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
+    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips},{file_path}")
     messages = [
         {"role": "system", "content": role},
         {"role": "user", "content": tips.format(question = question,correct_answer=correct_answer,answer=audio_ouput)}, 
