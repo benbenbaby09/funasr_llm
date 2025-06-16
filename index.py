@@ -84,4 +84,5 @@ demo = gr.Interface(fn=greet,
     ],
     outputs=[gr.Textbox(label="面试者回答文本"),gr.Textbox(label="AI评估")])
 
+#demo.launch(server_name='0.0.0.0',server_port=7860,ssl_certfile="./../keys/ai.suanputao.com.pem", ssl_keyfile="./../keys/ai.suanputao.com.key", ssl_verify=False)
 demo.launch(server_name='0.0.0.0')
