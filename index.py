@@ -61,6 +61,7 @@ def process_audio(audio):
     
     return audio_bytes
 
+#依赖ffmpeg
 def transcribe(audio_file: bytes, output: str = "txt"):
     model = AutoModel(model="paraformer-zh",  vad_model="fsmn-vad", punc_model="ct-punc",disable_update=True)
     res = model.generate(input = audio_file,
@@ -73,14 +74,14 @@ def transcribe(audio_file: bytes, output: str = "txt"):
 #输入文本处理程序
 def greet(question, audio_input, correct_answer, role, tips: str, ):
     # 保存音频文件并获取路径
-    file_path=save_audio(audio_input)
+    # file_path=save_audio(audio_input)
 
     # 保存音频文件并获取路径
     audio_bytes = process_audio(audio_input)
     # 调用模型进行处理
     audio_ouput = transcribe(audio_bytes)
     # audio_ouput="Java是吃的"
-    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips},{file_path}")
+    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
     messages = [
         {"role": "system", "content": role},
         {"role": "user", "content": tips.format(question = question,correct_answer=correct_answer,answer=audio_ouput)}, 
