@@ -73,7 +73,7 @@ def transcribe(audio_file: bytes, output: str = "txt"):
 #输入文本处理程序
 def greet(question, audio_input, correct_answer, role, tips: str, ):
     # 保存音频文件并获取路径
-    file_path=save_audio(audio)
+    file_path=save_audio(audio_input)
 
     # 保存音频文件并获取路径
     audio_bytes = process_audio(audio_input)
@@ -103,5 +103,5 @@ demo = gr.Interface(fn=greet,
     ],
     outputs=[gr.Textbox(label="面试者回答文本"),gr.Textbox(label="AI评估")])
 
-#demo.launch(server_name='0.0.0.0',server_port=7860,ssl_certfile="./../keys/ai.suanputao.com.pem", ssl_keyfile="./../keys/ai.suanputao.com.key", ssl_verify=False)
+#demo.launch(server_name='0.0.0.0',server_port=443,ssl_certfile="./../keys/ai.suanputao.com.pem", ssl_keyfile="./../keys/ai.suanputao.com.key", ssl_verify=False)
 demo.launch(server_name='0.0.0.0')
