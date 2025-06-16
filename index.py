@@ -51,7 +51,7 @@ def transcribe(audio_file: bytes, output: str = "txt"):
             batch_size_s=300,
             hotword='魔搭')
     output = res[0]['text'] # 提取文本内容
-    # logger.info(f"funasr :: complete transcribe audio file: {audio_file},{text}")
+    logger.info(f"transcribe output:{output},audio_file len:{audio_file.__len__()}")
     return output
 
 #输入文本处理程序
@@ -61,7 +61,7 @@ def greet(question, audio_input, correct_answer, role, tips: str, ):
     # 调用模型进行处理
     audio_ouput = transcribe(audio_bytes)
     # audio_ouput="Java是吃的"
-
+    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
     messages = [
         {"role": "system", "content": role},
         {"role": "user", "content": tips.format(question = question,correct_answer=correct_answer,answer=audio_ouput)}, 
