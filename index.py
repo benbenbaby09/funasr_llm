@@ -46,7 +46,7 @@ def process_audio(audio):
     return audio_bytes
 
 def transcribe(audio_file: bytes, output: str = "txt"):
-    model = AutoModel(model="paraformer-zh",  vad_model="fsmn-vad", punc_model="ct-punc")
+    model = AutoModel(model="paraformer-zh",  vad_model="fsmn-vad", punc_model="ct-punc",disable_update=True)
     res = model.generate(input = audio_file,
             batch_size_s=300,
             hotword='魔搭')
