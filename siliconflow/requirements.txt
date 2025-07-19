@@ -1,0 +1,6 @@
+gradio
+loguru
+funasr
+requests
+openai
+librosa

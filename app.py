@@ -7,6 +7,7 @@ from loguru import logger
 from openai import OpenAI
 
 from datetime import datetime
+from tencent.chat_api import chat_api
 
 #保存音频文件
 def save_audio(audio):
@@ -40,12 +41,6 @@ def chat_with_ollama(messages: list[dict], callback=None):
         messages=messages
     )
     logger.debug(f"chat with ollama: {response}")
-    # full_content = ""
-    # for chunk in response:
-    #     content = chunk.choices[0].delta.content
-    #     logger.debug(f"chat with ollama: {content}")
-    #     # await callback(content)
-    #     full_content += content
     return response.choices[0].message.content
 
 def process_audio(audio):
@@ -74,23 +69,26 @@ def transcribe(audio_file: bytes, output: str = "txt"):
 
 #输入文本处理程序
 def greet(question, audio_input, correct_answer, role, tips: str, ):
+    response=chat_api.create_session()
+    print(response)
     # 保存音频文件并获取路径
     # file_path=save_audio(audio_input)
 
     # 保存音频文件并获取路径
-    audio_bytes = process_audio(audio_input)
-    # 调用模型进行处理
-    audio_ouput = transcribe(audio_bytes)
+    # audio_bytes = process_audio(audio_input)
+    # # 调用模型进行处理
+    # audio_ouput = transcribe(audio_bytes)
 
-    logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
-    messages = [
-        {"role": "system", "content": role},
-        {"role": "user", "content": tips.format(question = question,correct_answer=correct_answer,answer=audio_ouput)}, 
-    ]
-    logger.info(f"chat with ollama: {messages}")
-    content = chat_with_ollama(messages)
+    # logger.info(f"greet: {question}, {audio_ouput}, {correct_answer}, {role}, {tips}")
+    # messages = [
+    #     {"role": "system", "content": role},
+    #     {"role": "user", "content": tips.format(question = question,correct_answer=correct_answer,answer=audio_ouput)}, 
+    # ]
+    # logger.info(f"chat with ollama: {messages}")
+    # content = chat_with_ollama(messages)
 
-    return [f"{audio_ouput}",f"{content}"]
+    # return [f"{audio_ouput}",f"{content}"]
+    return [f"test",f"test"]
 
 #接口创建函数
 #fn设置处理函数，inputs设置输入接口组件，outputs设置输出接口组件
